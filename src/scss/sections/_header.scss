@@ -1,4 +1,226 @@
 /*----- header ----- */
+.header {
+
+	&__content {
+		@include adaptive-value('padding-bottom', 35, 15);
+		@include adaptive-value('padding-top', 35, 15);
+	}
+
+	&__menu {
+		display: flex;
+		align-items: center;
+	}
+
+	&__logo {
+		position: relative;
+		z-index: 10000;
+		@include adaptive-value('margin-right', 60, 25);
+	}
+}
+
+.menu {
+
+	&__body {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	&__list {
+		display: flex;
+		align-items: center;
+	}
+
+	&__item {
+		@include adaptive-value('margin-right', 40, 15);
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	&__link {
+		@include adaptive-font(16, 12);
+		font-weight: bold;
+		color: #424551;
+	}
+}
+
+.menu-social {
+	&__list {
+		display: flex;
+	}
+
+	&__item {
+		position: relative;
+
+
+		&:first-child {
+			@include adaptive-value('margin-right', 100, 20);
+
+			&::before {
+				content: "";
+				position: absolute;
+				@include adaptive-value('left', -60, -25);
+				top: 0px;
+				@include adaptive-value('width', 40, 25);
+				@include adaptive-value('height', 40, 25);
+				background-image: url('../../img/header/iPhone.svg');
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		}
+
+		&:last-child {
+			&::before {
+				content: "";
+				position: absolute;
+				@include adaptive-value('left', -60, -10);
+				top: 0px;
+				@include adaptive-value('width', 40, 25);
+				@include adaptive-value('height', 40, 25);
+				background-image: url('../../img/header/Chat.svg');
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		}
+	}
+
+	&__text {
+		font-weight: bold;
+		@include adaptive-font(14, 12);
+		color: #424551;
+		@include adaptive-value('margin-bottom', 6, 2);
+	}
+
+	&__link {
+		@include adaptive-font(18, 14);
+		color: #1E212C;
+	}
+}
+
+.burger-menu {
+	display: none;
+	position: relative;
+	z-index: 10000;
+	width: 30px;
+	height: 18px;
+	flex-direction: column;
+	justify-content: center;
+	background-color: transparent;
+
+	span {
+		&::before {
+			content: "";
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			background-color: #1E212C;
+			width: 100%;
+			height: 2px;
+			transition: transform .2s;
+		}
+
+		display: inline-block;
+		background-color: #1E212C;
+		width: 100%;
+		transition: width .2s;
+		height: 2px;
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 0px;
+			bottom: 0px;
+			background-color: #1E212C;
+			width: 100%;
+			height: 2px;
+			transition: transform .2s;
+		}
+	}
+}
+
 
 //mediaQueriesStart
+@media (max-width: $md2) {
+	.menu-social {
+		&__item {
+			&:last-child {
+				display: none;
+			}
+		}
+	}
+}
+
+@media (max-width: $md3) {
+	.burger-menu {
+		display: flex;
+	}
+
+	.menu-social {
+		&__item {
+			&:first-child {
+				display: none;
+			}
+		}
+	}
+
+	.header {
+		&__menu {
+			justify-content: space-between;
+		}
+
+		&__logo {
+			margin-right: 0;
+		}
+	}
+
+	.menu {
+		&__list {
+			position: fixed;
+			background-color: $linkColor;
+			left: 0;
+			top: -100%;
+			transition: top .2s;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		&__item {
+			margin-right: 0;
+			margin-bottom: 25px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		&__link {
+			font-size: 35px;
+		}
+	}
+
+	.menu--active {
+		top: 0;
+
+		span {
+			&::before {
+				transform: rotate(45deg);
+				top: 9px;
+			}
+
+			width: 0;
+
+			&::after {
+				transform: rotate(-45deg);
+				bottom: 7px;
+			}
+		}
+	}
+}
+
 //mediaQueriesEnd
